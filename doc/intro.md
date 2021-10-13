@@ -1,3 +1,3 @@
-# Introduction to clojure-template
+# Introduction to clojure-database-postgres
 
 TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)

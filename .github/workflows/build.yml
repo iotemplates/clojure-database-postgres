@@ -53,3 +53,15 @@ jobs:
           sdk default leiningen ${{matrix.lein-version}}
       - name: Run tests
         run: lein test
+      - name: Integration test (setup) 
+        run: |
+          docker-compose up -d
+          until [[ `docker logs db 2>&1 | grep "system is ready" | wc -l` -gt 0 ]]; do sleep 5; echo "Waiting for db." ; done
+          sleep 5
+      - name: Integration test (run)
+        run: |
+          lein run
+      - name: Integration test (teardown)
+        run: |
+          docker-compose kill -f
+          docker-compose rm -f 
